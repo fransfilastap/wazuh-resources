@@ -1,0 +1,20 @@
+# Example Fail2ban jail configuration for Wazuh
+# Target Path: /etc/fail2ban/jail.d/wazuh-jail.local
+# After creating/editing this file, restart fail2ban: sudo systemctl restart fail2ban
+
+[wazuh-jail]
+enabled = true
+port = all
+# Choose your banning action. 
+# Common options: iptables-allports, ufw, firewalld-allports
+banaction = iptables-allports
+
+# Fail2ban requires a logpath to start a jail, even if we are manually 
+# feeding it IPs via fail2ban-client. /dev/null works perfectly for this.
+logpath = /dev/null
+
+# Wazuh handles the unban timer via the <timeout> XML configuration.
+# We set a large bantime here (e.g., 1 year) so fail2ban doesn't prematurely 
+# unban the IP before Wazuh tells it to via the 'delete' command.
+bantime = 31536000
+maxretry = 1

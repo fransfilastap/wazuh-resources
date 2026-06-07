@@ -1,0 +1,32 @@
+<!-- 
+  Add this to your Wazuh Manager / Agent configuration (ossec.conf).
+  If you want the manager to run the script, configure it on the manager.
+  If you want an agent to run it, configure it on the agent (or via shared agent.conf).
+-->
+
+<!-- 1. Define the Command -->
+<command>
+  <name>fail2ban-ban</name>
+  <executable>wazuh-fail2ban.sh</executable>
+  <!-- Timeout in seconds for the script to execute -->
+  <timeout_allowed>yes</timeout_allowed>
+</command>
+
+<!-- 2. Define the Active Response trigger -->
+<active-response>
+  <!-- The command defined above -->
+  <command>fail2ban-ban</command>
+  
+  <!-- 'local' runs the response on the agent that generated the alert. 
+       'server' runs it on the manager. -->
+  <location>local</location>
+  
+  <!-- Trigger this response on alerts with level 10 or higher -->
+  <!-- <level>10</level> -->
+  
+  <!-- Alternatively, trigger based on a specific rule ID: -->
+  <!-- <rules_id>100001</rules_id> -->
+
+  <!-- The script will receive a "delete" command after this timeout (seconds) -->
+  <timeout>3600</timeout>
+</active-response>

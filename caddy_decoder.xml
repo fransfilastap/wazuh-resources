@@ -1,0 +1,9 @@
+<!--
+  Caddy Access Log Decoder for Wazuh
+
+  Caddy's JSON access logs are automatically parsed by Wazuh's built-in
+  JSON decoder. No custom regex decoder is needed.
+-->
+<decoder name="caddy_dummy">
+  <program_name>caddy_dummy_ignore</program_name>
+</decoder>
