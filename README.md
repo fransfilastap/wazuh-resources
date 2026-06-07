@@ -34,11 +34,18 @@ Caddy produces JSON formatted access logs, which Wazuh's built-in JSON decoder c
 
 **Fail2ban Configuration**
 
-*   **`fail2ban/wazuh-jail.local`**
+*   **`fail2ban/jail.d/wazuh-jail.local`**
     *   **Purpose:** Defines a Fail2ban jail named `wazuh-jail` that listens to manual ban/unban commands from the Wazuh Active Response script.
     *   **Installation:** 
         ```bash
-        sudo cp fail2ban/wazuh-jail.local /etc/fail2ban/jail.d/
+        sudo cp fail2ban/jail.d/wazuh-jail.local /etc/fail2ban/jail.d/
+        ```
+
+*   **`fail2ban/filter.d/wazuh-jail.conf`**
+    *   **Purpose:** Defines a dummy regex filter for `wazuh-jail` to avoid Fail2ban startup errors.
+    *   **Installation:** 
+        ```bash
+        sudo cp fail2ban/filter.d/wazuh-jail.conf /etc/fail2ban/filter.d/
         sudo systemctl restart fail2ban
         ```
 

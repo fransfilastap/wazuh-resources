@@ -34,11 +34,18 @@ Caddy menghasilkan log akses berformat JSON, yang dapat diurai secara otomatis o
 
 **Konfigurasi Fail2ban**
 
-*   **`fail2ban/wazuh-jail.local`**
+*   **`fail2ban/jail.d/wazuh-jail.local`**
     *   **Tujuan:** Mendefinisikan *jail* Fail2ban bernama `wazuh-jail` yang mendengarkan perintah pemblokiran/pembukaan blokir manual dari skrip Wazuh Active Response.
     *   **Instalasi:** 
         ```bash
-        sudo cp fail2ban/wazuh-jail.local /etc/fail2ban/jail.d/
+        sudo cp fail2ban/jail.d/wazuh-jail.local /etc/fail2ban/jail.d/
+        ```
+
+*   **`fail2ban/filter.d/wazuh-jail.conf`**
+    *   **Tujuan:** Filter regex dummy untuk mencegah error saat Fail2ban dijalankan, karena *jail* ini dipicu secara manual.
+    *   **Instalasi:** 
+        ```bash
+        sudo cp fail2ban/filter.d/wazuh-jail.conf /etc/fail2ban/filter.d/
         sudo systemctl restart fail2ban
         ```
 
